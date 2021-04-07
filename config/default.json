@@ -4,5 +4,9 @@
     "database":"express",
     "user":"express",
     "password":"123456"
+  },
+  "jwt_config":{
+    "secret":"my_token",
+    "expiresIn": "24h"
   }
 }
