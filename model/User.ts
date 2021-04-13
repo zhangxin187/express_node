@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
+import pagination from 'mongoose-paginate-v2';
+
 // import bcrypt from 'bcryptjs';
 
 // 创建规则
@@ -21,6 +23,7 @@ const UserSchema = new Schema(
     phone: {
       type: String,
       require: true,
+      unique:true
     },
 
     role: {
@@ -45,6 +48,9 @@ const UserSchema = new Schema(
   },
   { versionKey: false }
 );
+
+// 使用分页插件
+UserSchema.plugin(pagination);
 
 //创建集合
 const User = model('users', UserSchema);

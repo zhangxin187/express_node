@@ -6,8 +6,10 @@ const { database, user, password, host } = db_config;
 
 mongoose
   .connect(`mongodb://${user}:${password}@${host}/${database}`, {
+    // 去掉警告提示
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(
     () => {
