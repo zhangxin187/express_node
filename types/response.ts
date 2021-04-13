@@ -1,5 +1,5 @@
 export interface Result {
-  data:object,
+  data:any,
   meta:Meta
 }
 export interface Meta {
