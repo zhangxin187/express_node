@@ -1,0 +1,20 @@
+{
+  "index": {
+    "id": 0,
+    "component": "Index",
+    "label": "首页",
+    "breadcrumb": []
+  },
+  "user": {
+    "id": 1,
+    "component": "User",
+    "label": "用户列表",
+    "breadcrumb": ["用户管理", "用户列表"]
+  },
+  "category": {
+    "id": 2,
+    "component": "Category",
+    "label": "分类",
+    "breadcrumb": ["物品管理", "分类列表"]
+  }
+}
