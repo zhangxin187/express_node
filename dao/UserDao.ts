@@ -1,4 +1,3 @@
-import { truncate } from 'fs/promises';
 import { PaginateOptions, PaginateResult } from 'mongoose';
 import User from '../model/User';
 import { PaginationData } from '../types/pagination';
@@ -8,17 +7,9 @@ import { UserData, AddUserData, UserFields } from '../types/user';
  * @param condition 查询条件
  * @returns 返回的是对象形式的用户数据
  */
-function findUser(condition: UserFields) {
-  return new Promise(async (resolve, reject) => {
-    //查询数据
-    const data = await User.findOne(condition);
-
-    if (!data) {
-      reject('查询不到');
-    } else {
-      resolve(data);
-    }
-  });
+async function findUser(condition: UserFields) {
+  const data = await User.findOne(condition);
+  return data;
 }
 
 /**
@@ -26,7 +17,7 @@ function findUser(condition: UserFields) {
  * @param condition 查询条件
  * @returns 以数组的形式返回用户数据
  */
-function getUsers(condition: any) {
+async function getUsers(condition: any) {
   // query可以为空
   let { query = {}, pagesize, pagenum } = condition;
   // query可能是对象字符串
@@ -47,18 +38,11 @@ function getUsers(condition: any) {
     select: '_id name phone role status createTime', // 挑选查询的字段,不查询密码
     sort: 'role', //排序,根据字段值升序排列
   };
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const data: PaginateResult<PaginationData> = await User.paginate(
-        query,
-        option
-      );
-      resolve(data);
-    } catch (error) {
-      reject(error);
-    }
-  });
+  const data: PaginateResult<PaginationData> = await User.paginate(
+    query,
+    option
+  );
+  return data;
 }
 
 /**
@@ -67,18 +51,12 @@ function getUsers(condition: any) {
  * @param changedFields 修改的字段对象
  * @returns
  */
-function updateUserById(id: any, changedFields: any) {
-  return new Promise(async (resolve, reject) => {
-    const data = await User.findByIdAndUpdate(id, changedFields, {
-      new: true, // 返回更新后的文档
-      fields: '-password', // 不查询密码字段
-    });
-    if (data) {
-      resolve(data);
-    } else {
-      reject('未查询到该用户');
-    }
+async function updateUserById(id: any, changedFields: any) {
+  const data = await User.findByIdAndUpdate(id, changedFields, {
+    new: true, // 返回更新后的文档
+    fields: '-password', // 不查询密码字段
   });
+  return data;
 }
 
 /**
@@ -87,15 +65,9 @@ function updateUserById(id: any, changedFields: any) {
  * @param doc  添加的用户文档对象
  * @returns  该用户文档对象
  */
-function addUser(doc: AddUserData) {
-  return new Promise<UserData>(async (resolve, reject) => {
-    try {
-      const data = await User.create(doc);
-      resolve(data);
-    } catch (error) {
-      reject(error);
-    }
-  });
+async function addUser(doc: AddUserData) {
+  const data = await User.create(doc);
+  return data;
 }
 
 /**
@@ -103,15 +75,9 @@ function addUser(doc: AddUserData) {
  * @param id  用户id
  * @returns 被删除的该用户
  */
-function deleteUserById(id: string) {
-  return new Promise<UserData>(async (resolve, reject) => {
-    const data = await User.findByIdAndDelete(id);
-    if (data) {
-      resolve(data);
-    } else {
-      reject('未查询到该用户');
-    }
-  });
+async function deleteUserById(id: string) {
+  const data = await User.findByIdAndDelete(id);
+  return data;
 }
 
 export default {

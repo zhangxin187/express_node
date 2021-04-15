@@ -11,6 +11,6 @@ export default async (ctx: Context): Promise<void> => {
     const data = await loginService.login(body);
     ctx.sendResult(data, 200, '登录成功');
   } catch (error) {
-    ctx.sendResult(null, 401, '登录失败');
+    ctx.sendResult(null, 401, error);
   }
 };

@@ -1,7 +1,7 @@
 import UserDao from '../dao/UserDao';
 // 加密模块
 import bcrypt from 'bcryptjs';
-import _, { reject } from 'lodash';
+import _ from 'lodash';
 import { ParsedUrlQuery } from 'node:querystring';
 import { AddUserData, UserData, UserFields } from '../types/user';
 
@@ -10,15 +10,13 @@ import { AddUserData, UserData, UserFields } from '../types/user';
  * @param params query参数
  */
 function getUsers(params: ParsedUrlQuery) {
-  return new Promise((resolve, reject) => {
-    UserDao.getUsers(params).then(
-      (data) => {
-        resolve(data);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
+  return new Promise(async (resolve, reject) => {
+    const data = await UserDao.getUsers(params);
+    if (data) {
+      resolve(data);
+    } else {
+      reject('获取用户列表失败');
+    }
   });
 }
 
@@ -34,15 +32,13 @@ function updateUserById(id: string, params: UserFields) {
     const hash = bcrypt.hashSync(params.password, salt);
     params.password = hash;
   }
-  return new Promise((resolve, reject) => {
-    UserDao.updateUserById(id, params).then(
-      (data) => {
-        resolve(data);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
+  return new Promise(async (resolve, reject) => {
+    const data = await UserDao.updateUserById(id, params);
+    if (data) {
+      resolve(data);
+    } else {
+      reject('更新失败');
+    }
   });
 }
 
@@ -53,12 +49,11 @@ function updateUserById(id: string, params: UserFields) {
  */
 function addUser(params: AddUserData) {
   return new Promise(async (resolve, reject) => {
-    
     // 验证手机号码是否重复
     const user = await UserDao.findUser({ phone: params.phone });
     if (user) {
       // 账号重复
-      return reject('该手机号已被注册');
+      reject('该手机号已被注册');
     }
     // 对密码进行加密
     const { password } = params;
@@ -66,18 +61,17 @@ function addUser(params: AddUserData) {
     const hash = bcrypt.hashSync(password, salt);
     // 加密后的密码替换原密码
     params.password = hash;
-    UserDao.addUser(params).then(
-      (data) => {
-        // 排除password字段
-        // mongoose返回的不是JS对象,不能对对象进行操作
-        const result = JSON.parse(JSON.stringify(data));
-        const res = _.omit(result, 'password');
-        resolve(res);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
+
+    const data = await UserDao.addUser(params);
+    if (data) {
+      // 排除password字段
+      // mongoose返回的不是JS对象,不能对对象进行操作
+      const result = JSON.parse(JSON.stringify(data));
+      const res = _.omit(result, 'password');
+      resolve(res);
+    } else {
+      reject('添加失败');
+    }
   });
 }
 
@@ -86,15 +80,13 @@ function addUser(params: AddUserData) {
  * @param params id
  */
 function deleteUserById(params: string) {
-  return new Promise<UserData>((resolve, reject) => {
-    UserDao.deleteUserById(params).then(
-      (data) => {
-        resolve(data);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
+  return new Promise<UserData>(async (resolve, reject) => {
+    const data = await UserDao.deleteUserById(params);
+    if (data) {
+      resolve(data);
+    } else {
+      reject('删除失败');
+    }
   });
 }
 
@@ -103,18 +95,16 @@ function deleteUserById(params: string) {
  * @param params {_id:xx}
  */
 function findUserById(params: UserFields) {
-  return new Promise((resolve, reject) => {
-    UserDao.findUser(params).then(
-      (data) => {
-        // 排除password字段
-        const result = JSON.parse(JSON.stringify(data));
-        const res = _.omit(result, ['password', 'createTime']);
-        resolve(res);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
+  return new Promise(async (resolve, reject) => {
+    const data = await UserDao.findUser(params);
+    if (data) {
+      // 排除password字段
+      const result = JSON.parse(JSON.stringify(data));
+      const res = _.omit(result, ['password', 'createTime']);
+      resolve(res);
+    } else {
+      reject('该用户不存在');
+    }
   });
 }
 
