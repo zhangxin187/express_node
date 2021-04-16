@@ -41,4 +41,18 @@ router.delete('/categories/:id', deleteCategory);
 import addCategory from './category/addCategory';
 router.post('/categories', addCategory);
 
+// 物品Goods相关路由
+// 获取物品列表
+import getGoods from './goods/getGoods';
+router.get('/goods', getGoods);
+// 更新物品
+import updateGoods from './goods/updateGoods';
+router.put('/goods/:id', updateGoods);
+// 删除物品
+import deleteGoods from './goods/deleteGoods';
+router.delete('/goods/:id', deleteGoods);
+// 添加物品
+import addGoods from './goods/addGoods';
+router.post('/goods', addGoods);
+
 export default router;
