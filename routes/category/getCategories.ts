@@ -3,7 +3,7 @@ import { getCategories } from '../../service/categoryService';
 
 export default async (ctx: Context) => {
   // 拿到参数
-  const { type, pagesize, pagenum } = ctx.query;
+  const { type, pagesize=100, pagenum=1 } = ctx.query;
   const params = { pagenum, pagesize };
 
   try {

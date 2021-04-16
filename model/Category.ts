@@ -1,4 +1,4 @@
-import mongoose, { isValidObjectId } from 'mongoose';
+import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 import pagination from 'mongoose-paginate-v2';
 
