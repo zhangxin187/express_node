@@ -2,7 +2,7 @@ import GoodsDao from '../dao/GoodsDao';
 import _ from 'lodash';
 
 /**
- * 添加物品
+ * 获取物品列表
  * @param query get参数
  */
 export function getGoods(query: any) {
