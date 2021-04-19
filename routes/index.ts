@@ -55,4 +55,18 @@ router.delete('/goods/:id', deleteGoods);
 import addGoods from './goods/addGoods';
 router.post('/goods', addGoods);
 
+// 客户Customer相关路由
+// 获取客户列表
+import getCustomer from './customer/getCustomer';
+router.get('/customers', getCustomer);
+// 删除客户
+import addCustomer from './customer/addCustomer';
+router.post('/customers', addCustomer);
+// 删除客户
+import deleteCustomer from './customer/deleteCustomer';
+router.delete('/customers/:id', deleteCustomer);
+// 更新客户
+import updateCustomer from './customer/updateCustomer';
+router.put('/customers/:id', updateCustomer);
+
 export default router;
