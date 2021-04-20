@@ -54,6 +54,9 @@ router.delete('/goods/:id', deleteGoods);
 // 添加物品
 import addGoods from './goods/addGoods';
 router.post('/goods', addGoods);
+// 获取与分类拼接的物品数据
+import getGoodsWithCate from './goods/getGoodsWithCate';
+router.get('/goods/withCate', getGoodsWithCate);
 
 // 客户Customer相关路由
 // 获取客户列表
@@ -68,5 +71,22 @@ router.delete('/customers/:id', deleteCustomer);
 // 更新客户
 import updateCustomer from './customer/updateCustomer';
 router.put('/customers/:id', updateCustomer);
+
+// 订单Order路由
+// 获取订单列表
+import getOrders from './order/getOrders';
+router.get('/orders', getOrders);
+// 根据id获取订单
+import findOrderById from './order/findOrderById';
+router.get('/orders/:id',findOrderById);
+// 根据id删除订单
+import deleteOrder from './order/deleteOrder';
+router.delete('/orders/:id',deleteOrder);
+// 更新订单
+import updateOrder from './order/updateOrder';
+router.put('/orders/:id', updateOrder);
+// 添加订单
+import addOrder from './order/addOrder';
+router.post('/orders', addOrder);
 
 export default router;
