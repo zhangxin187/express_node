@@ -89,4 +89,16 @@ router.put('/orders/:id', updateOrder);
 import addOrder from './order/addOrder';
 router.post('/orders', addOrder);
 
+// echarts图表相关数据接口
+// 获取订单物品分类统计数据
+import getCountCate from './charts/getCountCate';
+router.get('/charts/countCate', getCountCate);
+// 获取订单物品统计数据
+import getCountGoods from './charts/getCountGoods';
+router.get('/charts/countGoods', getCountGoods);
+// 获取订单分类按时间段一系列的数据
+import getCountCateSeries from './charts/getCountCateSeries';
+router.get('/charts/countCateSeries', getCountCateSeries);
+
+
 export default router;
