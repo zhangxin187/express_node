@@ -2,6 +2,7 @@ import Order from '../model/Order';
 import Customer from '../model/Customer';
 import Goods from '../model/Goods';
 import { PaginateOptions } from 'mongoose';
+import Category from '../model/Category';
 
 /**
  * 获取订单列表
@@ -15,7 +16,7 @@ async function getOrders(pagenum: number, pagesize: number, condition: any) {
     page: pagenum,
     limit: pagesize,
     populate: [
-      { path: 'goods', model: Goods },
+      { path: 'goods', model: Goods ,populate: { path: 'category', model: Category }},
       { path: 'sender', model: Customer },
     ],
     // sort:'category'
