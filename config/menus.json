@@ -11,10 +11,34 @@
     "label": "用户列表",
     "breadcrumb": ["用户管理", "用户列表"]
   },
-  "category": {
+  "customer": {
     "id": 2,
+    "component": "Customer",
+    "label": "客户列表",
+    "breadcrumb": ["用户管理", "客户列表"]
+  },
+  "category": {
+    "id": 3,
     "component": "Category",
-    "label": "分类",
+    "label": "分类列表",
     "breadcrumb": ["物品管理", "分类列表"]
+  },
+  "goods": {
+    "id": 4,
+    "component": "Goods",
+    "label": "物品列表",
+    "breadcrumb": ["物品管理", "物品列表"]
+  },
+  "order": {
+    "id": 5,
+    "component": "Order",
+    "label": "订单列表",
+    "breadcrumb": ["订单管理", "订单列表"]
+  },
+  "charts": {
+    "id": 6,
+    "component": "Chart",
+    "label": "数据图表",
+    "breadcrumb": ["数据统计", "数据图表"]
   }
 }
