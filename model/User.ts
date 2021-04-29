@@ -45,6 +45,10 @@ const UserSchema = new Schema(
       required: true,
       default: 1,
     },
+
+    // 头像
+    // 存储的是静态资源路径
+    avatar:''
   },
   { versionKey: false }
 );

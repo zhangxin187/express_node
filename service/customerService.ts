@@ -6,7 +6,7 @@ import _ from 'lodash';
  * @param query get参数
  */
 export function getCustomers(query: any) {
-  const { pagenum = 1, pagesize = 1000 } = query;
+  const { pagenum = 1, pagesize = 1000000 } = query;
   const condition = _.omit(query, ['pagenum', 'pagesize']);
   // 模糊查询
   for (let key in condition) {

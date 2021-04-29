@@ -35,7 +35,7 @@ async function getUsers(condition: any) {
   const option: PaginateOptions = {
     page: pagenum,
     limit: pagesize,
-    select: '_id name phone role status createTime', // 挑选查询的字段,不查询密码
+    select: '_id name phone role status createTime avatar', // 挑选查询的字段,不查询密码
     sort: 'role', //排序,根据字段值升序排列
   };
   const data: PaginateResult<PaginationData> = await User.paginate(
