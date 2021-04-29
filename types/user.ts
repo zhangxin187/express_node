@@ -30,4 +30,5 @@ export interface UserFields {
   name?: string;
   phone?: string;
   password?:string;
+  avatar?:string
 }

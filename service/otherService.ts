@@ -1,11 +1,9 @@
 import data from '../config/menus.json';
-function getMenus() {
-  //
+
+// 获取menus菜单数据
+export function getMenus() {
   return new Promise((resolve, reject) => {
     resolve(data);
   });
 }
 
-export default {
-  getMenus,
-};

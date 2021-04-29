@@ -9,6 +9,9 @@ router.post('/login', login);
 // 获取左侧菜单信息列表
 import getMenus from './others/getMenus';
 router.get('/menus', getMenus);
+// 文件上传路由
+import upload from './others/uploadFile';
+router.post('/upload',upload);
 
 // 用户模块相关路由
 // 获取用户列表
@@ -78,10 +81,10 @@ import getOrders from './order/getOrders';
 router.get('/orders', getOrders);
 // 根据id获取订单
 import findOrderById from './order/findOrderById';
-router.get('/orders/:id',findOrderById);
+router.get('/orders/:id', findOrderById);
 // 根据id删除订单
 import deleteOrder from './order/deleteOrder';
-router.delete('/orders/:id',deleteOrder);
+router.delete('/orders/:id', deleteOrder);
 // 更新订单
 import updateOrder from './order/updateOrder';
 router.put('/orders/:id', updateOrder);
@@ -99,6 +102,5 @@ router.get('/charts/countGoods', getCountGoods);
 // 获取订单分类按时间段一系列的数据
 import getCountCateSeries from './charts/getCountCateSeries';
 router.get('/charts/countCateSeries', getCountCateSeries);
-
 
 export default router;

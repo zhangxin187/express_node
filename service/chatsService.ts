@@ -43,6 +43,7 @@ function selectOrderByDate(orders: any, start: any, end: any) {
 /**
  * 统计订单
  * @param orders 订单数据列表
+ * @returns 返回统计的物品、分类数据
  */
 function countOrder(orders: any) {
   // countCate：统计订单分类的个数/重量
@@ -93,8 +94,9 @@ function countOrder(orders: any) {
 
 /**
  * 获取订单物品分类的一系列统计数据,以时间为点获取一系列数据
- * @param type  日期类型,如day、month
- * @param range 日期跨度,最近七天、最近一个月...
+ * @param start 起始日期,时间戳
+ * @param end   终止日期,时间戳
+ * @param cut   要将日期分为多少段
  * @returns     返回一段连续日期的订单分类的个数和总重量
  */
 export async function countCateSeries(
@@ -128,8 +130,11 @@ export async function countCateSeries(
 
 /**
  * 对时间进行切割,并返回对应时间段的一系列订单统计数据
- * @param orders
- * @param cut
+ * @param orders 订单
+ * @param start 起始日期,时间戳
+ * @param end   终止日期,时间戳
+ * @param range 时间跨度
+ * @param cut   要将日期分为多少段
  */
 function cutAndCountOrder(
   orders: any,
@@ -177,6 +182,11 @@ function cutAndCountOrder(
   return { data, lable };
 }
 
+/**
+ * 将数据处理为前端echarts折线图图所要求的
+ * @param orders 订单
+ * @returns 
+ */
 async function resolveCateSeriesToLine(orders: any) {
   // 处理为 [[name:xxx, data:[]]]
   // 获取分类数据
